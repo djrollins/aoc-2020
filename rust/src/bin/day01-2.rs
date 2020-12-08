@@ -1,16 +1,11 @@
-use itertools::{iproduct, Itertools};
-use std::env::{args, current_dir};
-use std::io::Read;
+use itertools::iproduct;
+
+use aoc_2020::utils::read_input;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let filename = args().nth(1).ok_or("plz give filename")?;
-    let filename = current_dir()?.join(filename);
-    let mut file = std::fs::File::open(filename)?;
+    let contents: String = read_input()?;
 
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)?;
-
-    let input: Vec<i32> = contents.lines().map(|line| line.parse()).collect();
+    let input: Vec<i32> = contents.lines().map(|line| line.parse().unwrap()).collect();
 
     let answer = iproduct!(
         input.iter().cloned(),

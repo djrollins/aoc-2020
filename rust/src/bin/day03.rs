@@ -1,8 +1,9 @@
-use std::env::{args, current_dir};
+use aoc_2020::utils::read_input;
 
 fn collisions<Grid, Row>(down: usize, across: usize, grid: Grid) -> usize
-where Grid: IntoIterator<Item = Row>,
-      Row: IntoIterator<Item = bool>
+where
+    Grid: IntoIterator<Item = Row>,
+    Row: IntoIterator<Item = bool>,
 {
     let multiplier = across as f32 / down as f32;
     grid.into_iter()
@@ -14,10 +15,7 @@ where Grid: IntoIterator<Item = Row>,
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let filename = args().nth(1).ok_or("plz give filename")?;
-    let filename = current_dir()?.join(filename);
-
-    let contents = std::fs::read_to_string(&filename)?;
+    let contents = read_input()?;
 
     let grid: Vec<_> = contents
         .lines()
@@ -26,7 +24,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     println!("part 1: {:?}", collisions(1, 3, grid.clone()));
 
-    let part2: usize = [(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)].iter()
+    let part2: usize = [(1, 1), (1, 3), (1, 5), (1, 7), (2, 1)]
+        .iter()
         .map(|(down, across)| collisions(*down, *across, grid.clone()))
         .product();
 
@@ -34,4 +33,3 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     Ok(())
 }
-

@@ -1,14 +1,9 @@
 use itertools::iproduct;
-use std::env::{args, current_dir};
-use std::io::Read;
+
+use aoc_2020::utils::read_input;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    let filename = args().nth(1).ok_or("plz give filename")?;
-    let filename = current_dir()?.join(filename);
-    let mut file = std::fs::File::open(filename)?;
-
-    let mut contents = String::new();
-    file.read_to_string(&mut contents)?;
+    let contents = read_input()?;
 
     let input: Vec<i32> = contents.lines().map(|line| line.parse().unwrap()).collect();
 
