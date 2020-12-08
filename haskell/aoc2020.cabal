@@ -31,3 +31,9 @@ executable day04
                        regex-pcre,
                        regex-base,
                        array
+
+executable day06
+  import:              common-stanzas
+  hs-source-dirs:      src/day06
+  main-is:             Main.hs
+  build-depends:       split
