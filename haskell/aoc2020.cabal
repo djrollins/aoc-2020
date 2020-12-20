@@ -37,3 +37,10 @@ executable day06
   hs-source-dirs:      src/day06
   main-is:             Main.hs
   build-depends:       split
+
+executable day07
+  import:              common-stanzas
+  hs-source-dirs:      src/day07
+  main-is:             Main.hs
+  build-depends:       parsec,
+  		       containers

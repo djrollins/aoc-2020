@@ -1,17 +1,17 @@
 module Main (main) where
 
+import Data.List
+import Data.List.Split
 import System.Directory (getCurrentDirectory)
 import System.Environment (getArgs)
 import System.FilePath ((</>))
 import System.IO ()
-import Data.List.Split
-import Data.List
 
 part1 :: String -> Int
 part1 = sum . map (length . nub . filter (/= '\n')) . splitOn "\n\n"
 
 part2 :: String -> Int
-part2 = sum . map (length . nub . foldr intersect ['a'..'z'] . lines) . splitOn "\n\n"
+part2 = sum . map (length . nub . foldr intersect ['a' .. 'z'] . lines) . splitOn "\n\n"
 
 main :: IO ()
 main = do
