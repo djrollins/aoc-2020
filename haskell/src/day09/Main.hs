@@ -1,11 +1,11 @@
 module Main (main) where
 
 import Data.List (foldl', tails)
+import Debug.Trace
 import System.Directory (getCurrentDirectory)
 import System.Environment (getArgs)
 import System.FilePath ((</>))
 import System.IO ()
-import Debug.Trace
 
 pairs :: [a] -> [(a, a)]
 pairs xs = [(x, y) | (x : ys) <- tails xs, y <- ys]
@@ -28,15 +28,13 @@ main = do
   let filePath = currentDirectory </> filename
   content <- lines <$> readFile filePath
   let numbers = read <$> content :: [Int]
-  let part1_result  = part1 numbers
+  let part1_result = part1 numbers
   print part1_result
   print $ part2 numbers part1_result
 
 part2 :: [Int] -> Int -> Int
 part2 numbers total =
   let (range, totals) = unzip $ takeWhile ((<= total) . snd) (zip numbers (scanl1 (+) numbers))
-  in if last totals == total
-      then minimum range + maximum range
-      else part2 (tail numbers) total
-
-  
+   in if last totals == total
+        then minimum range + maximum range
+        else part2 (tail numbers) total

@@ -49,4 +49,8 @@ executable day09
   import:              common-stanzas
   hs-source-dirs:      src/day09
   main-is:             Main.hs
-  build-depends:       split
+
+executable day10
+  import:              common-stanzas
+  hs-source-dirs:      src/day10
+  main-is:             Main.hs
