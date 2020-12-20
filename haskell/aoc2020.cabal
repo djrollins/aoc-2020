@@ -44,3 +44,9 @@ executable day07
   main-is:             Main.hs
   build-depends:       parsec,
   		       containers
+
+executable day09
+  import:              common-stanzas
+  hs-source-dirs:      src/day09
+  main-is:             Main.hs
+  build-depends:       split
