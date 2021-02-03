@@ -9,19 +9,23 @@ type Coord = { x: number; y: number };
 type CardinalDirection = "N" | "E" | "S" | "W";
 type RotationalDirection = "R" | "L";
 
-const move_cardinal = (coord: Coord, direction: CardinalDirection, distance: number): Coord => {
-    let { x, y } = coord;
-    switch (direction) {
-      case "N":
-        return { x, y: y + distance };
-      case "E":
-        return { y, x: x + distance };
-      case "S":
-        return { x, y: y - distance };
-      case "W":
-        return { y, x: x - distance };
-    }
+const move_cardinal = (
+  coord: Coord,
+  direction: CardinalDirection,
+  distance: number,
+): Coord => {
+  let { x, y } = coord;
+  switch (direction) {
+    case "N":
+      return { x, y: y + distance };
+    case "E":
+      return { y, x: x + distance };
+    case "S":
+      return { x, y: y - distance };
+    case "W":
+      return { y, x: x - distance };
   }
+};
 
 abstract class Commandable {
   abstract _forward(amount: number): void;
@@ -68,7 +72,7 @@ abstract class Commandable {
 
 class Waypoint extends Commandable {
   ship: Coord = { x: 0, y: 0 };
-  waypoint: Coord = { x: 10, y: 1};
+  waypoint: Coord = { x: 10, y: 1 };
 
   _rotate_right_90() {
     this.waypoint = {
@@ -81,7 +85,7 @@ class Waypoint extends Commandable {
     this.ship = {
       x: this.ship.x + this.waypoint.x * amount,
       y: this.ship.y + this.waypoint.y * amount,
-    }
+    };
   }
 
   _move_cardinal(direction: CardinalDirection, amount: number): void {
@@ -124,11 +128,11 @@ const manhatten_distance = ({ x, y }: Coord): number =>
 
 const ship = new Ship();
 const waypoint = new Waypoint();
-console.log(waypoint)
+console.log(waypoint);
 for await (const line of readLines(fileReader)) {
   ship.command(line);
   waypoint.command(line);
-  console.log(waypoint)
+  console.log(waypoint);
 }
 
 console.log(manhatten_distance(ship.coord));
